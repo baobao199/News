@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class Catogory_Fragment extends Fragment {
+public class ListCatogory_Fragment extends Fragment {
     private RecyclerView recyclerview_catogory;
     private ArrayList<Catogory> arrayList;
     private CatogoryAdapter catogoryAdapter;
@@ -31,7 +31,7 @@ public class Catogory_Fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.catogory_fragment,container,false);
+        return inflater.inflate(R.layout.listcatogory_fragment,container,false);
     }
 
     @Override

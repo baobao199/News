@@ -5,11 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.news.R;
-import com.example.news.View.Catogory.Catogory_Fragment;
+import com.example.news.View.Catogory.ListCatogory_Fragment;
 import com.example.news.View.Home.Home_Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                             selectedFragment = new Account_Fragment();
                             break;
                         case R.id.menu_catogory:
-                            selectedFragment = new Catogory_Fragment();
+                            selectedFragment = new ListCatogory_Fragment();
                             break;
                     }
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();

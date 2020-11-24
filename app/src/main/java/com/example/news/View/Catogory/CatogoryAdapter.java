@@ -1,7 +1,7 @@
 package com.example.news.View.Catogory;
 
 import android.content.Context;
-import android.media.Image;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.news.Model.Catogory;
-import com.example.news.Model.Newspaper;
 import com.example.news.R;
 
 import java.util.ArrayList;
@@ -37,9 +36,17 @@ public class CatogoryAdapter extends RecyclerView.Adapter<CatogoryAdapter.Recycl
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerViewHolder holder, final int position) {
         holder.tvCatogory.setText((CharSequence) arrayList.get(position).getName());
         Glide.with(context).load(arrayList.get(position).getImage()).into(holder.image);
+        holder.tvCatogory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, CatogoryActivity.class);
+                intent.putExtra("nameCatogory",arrayList.get(position).getName());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
