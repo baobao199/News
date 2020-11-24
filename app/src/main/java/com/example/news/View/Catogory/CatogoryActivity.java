@@ -41,11 +41,10 @@ public class CatogoryActivity extends AppCompatActivity {
         recyclerviewCatogory.setLayoutManager(new LinearLayoutManager(this));
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        Log.e("test1",""+nameCatorogy);
 
-    Query query = databaseReference.child("newspaper")
-            .orderByChild("type")
-            .equalTo(nameCatorogy);
+        Query query = databaseReference.child("newspaper")
+                .orderByChild("type")
+                .equalTo(nameCatorogy);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

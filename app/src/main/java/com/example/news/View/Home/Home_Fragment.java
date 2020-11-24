@@ -56,7 +56,6 @@ public class Home_Fragment extends Fragment {
                     Newspaper newspaper = data.getValue(Newspaper.class);
                     arrayList.add(newspaper);
                 }
-                Log.e("bao",""+arrayList.get(0).getAuthor());
                 listAdapter = new ListNewsPaperAdapter(arrayList,getContext());
                 recyclerView.setAdapter(listAdapter);
             }
