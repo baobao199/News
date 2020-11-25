@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.Account.Profile_Activity"></activity>
+        <activity android:name=".View.Account.j"></activity>
         <activity android:name=".View.Catogory.CatogoryActivity" />
         <activity android:name=".View.ReadActivity" />
         <activity android:name=".View.MainActivity">

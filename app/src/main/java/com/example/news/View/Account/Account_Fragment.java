@@ -1,19 +1,19 @@
 package com.example.news.View.Account;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.news.Model.Account;
 import com.example.news.R;
@@ -31,6 +31,11 @@ public class Account_Fragment extends Fragment {
     Button btSignUp;
 
     DatabaseReference databaseReference;
+    SharedPreferences sharedPreferences;
+
+    public static final String filename = "login";
+    public static final String username = "username";
+    public static final String passwordAcc = "password";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,6 +50,16 @@ public class Account_Fragment extends Fragment {
         etPassword = view.findViewById(R.id.etPassword);
         btSignIn = view.findViewById(R.id.btSignIn);
         btSignUp = view.findViewById(R.id.btSignUp);
+
+        sharedPreferences = getContext().getSharedPreferences(filename,getContext().MODE_PRIVATE);
+
+        if (sharedPreferences.contains(username)){
+            Profile_Fragment profile_activity = new Profile_Fragment();
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container,profile_activity);
+            transaction.commit();
+        }
+
         btSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
@@ -52,7 +67,7 @@ public class Account_Fragment extends Fragment {
                     Toast.makeText(getContext(),"You must enter your email or password",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    String email = etEmail.getText().toString();
+                    final String email = etEmail.getText().toString();
                     databaseReference = FirebaseDatabase.getInstance().getReference("account");
                     Query query = databaseReference
                             .orderByChild("email")
@@ -64,8 +79,18 @@ public class Account_Fragment extends Fragment {
                             for (DataSnapshot data : snapshot.getChildren()){
                                 Account account = data.getValue(Account.class);
                                 if (password.equals(account.getPassword())){
-                                    Intent intent = new Intent(getContext(),Profile_Activity.class);
-                                    startActivity(intent);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString(username, email);
+                                    editor.putString(passwordAcc,password);
+                                    editor.commit();
+
+                                    Profile_Fragment profile_activity = new Profile_Fragment();
+                                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                    transaction.replace(R.id.fragment_container,profile_activity);
+                                    transaction.commit();
+
+//                                    Intent intent = new Intent(getContext(),Profile_Activity.class);
+//                                    startActivity(intent);
                                 }
                                 else {
                                     Toast.makeText(getContext(),"Emal or Password is not correct",Toast.LENGTH_SHORT).show();
