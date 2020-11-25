@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.example.news.R;
 import com.example.news.View.Account.Account_Fragment;
+import com.example.news.View.Bookmark.Bookmark_Fragment;
 import com.example.news.View.Catogory.ListCatogory_Fragment;
 import com.example.news.View.Home.Home_Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

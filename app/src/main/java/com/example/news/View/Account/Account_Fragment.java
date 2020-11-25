@@ -85,12 +85,11 @@ public class Account_Fragment extends Fragment {
                                     editor.commit();
 
                                     Profile_Fragment profile_activity = new Profile_Fragment();
+
+
                                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                     transaction.replace(R.id.fragment_container,profile_activity);
                                     transaction.commit();
-
-//                                    Intent intent = new Intent(getContext(),Profile_Activity.class);
-//                                    startActivity(intent);
                                 }
                                 else {
                                     Toast.makeText(getContext(),"Emal or Password is not correct",Toast.LENGTH_SHORT).show();

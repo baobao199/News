@@ -22,7 +22,7 @@ public class Profile_Fragment extends Fragment {
     public static final String filename = "login";
     public static final String username = "username";
 
-    TextView tvName;
+    TextView tvName,tvEmail, tvAddress, tvSex, tvBirthday;
     Button btSingOut, btEditProfile;
 
     @Nullable
@@ -36,18 +36,21 @@ public class Profile_Fragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         tvName = view.findViewById(R.id.tvName);
+        tvEmail = view.findViewById(R.id.tvEmail);
+        tvAddress = view.findViewById(R.id.tvAddress);
+        tvSex = view.findViewById(R.id.tvSex);
+        tvBirthday = view.findViewById(R.id.tvBirthday);
+
         btEditProfile = view.findViewById(R.id.btEditProfile);
         btSingOut = view.findViewById(R.id.btSignOut);
 
         sharedPreferences = getContext().getSharedPreferences(filename, Context.MODE_PRIVATE);
         if (sharedPreferences.contains(username)){
-            tvName.setText("ok");
         }
 
         btSingOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("bao","ok");
 
                 SharedPreferences preferences = getContext().getSharedPreferences(filename,Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
