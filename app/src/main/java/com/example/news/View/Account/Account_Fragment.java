@@ -1,5 +1,6 @@
 package com.example.news.View.Account;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -112,6 +113,15 @@ public class Account_Fragment extends Fragment {
                         }
                     });
                 }
+            }
+        });
+
+        btSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), RegisterActivity.class);
+                startActivity(i);
+                ((Activity) getActivity()).overridePendingTransition(0, 0);
             }
         });
     }
