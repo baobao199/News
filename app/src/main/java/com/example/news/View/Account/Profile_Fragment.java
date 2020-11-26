@@ -46,6 +46,11 @@ public class Profile_Fragment extends Fragment {
 
         sharedPreferences = getContext().getSharedPreferences(filename, Context.MODE_PRIVATE);
         if (sharedPreferences.contains(username)){
+            tvEmail.setText(sharedPreferences.getString(username,"email"));
+            tvAddress.setText(sharedPreferences.getString("address","address"));
+            tvSex.setText(sharedPreferences.getString("sex","sex"));
+            tvBirthday.setText(sharedPreferences.getString("birthday","birthday"));
+            tvName.setText(sharedPreferences.getString("name","name"));
         }
 
         btSingOut.setOnClickListener(new View.OnClickListener() {

@@ -3,6 +3,7 @@ package com.example.news.View.Account;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.news.Model.Account;
 import com.example.news.R;
@@ -23,6 +25,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Account_Fragment extends Fragment {
     EditText etEmail;
@@ -53,6 +58,7 @@ public class Account_Fragment extends Fragment {
 
         sharedPreferences = getContext().getSharedPreferences(filename,getContext().MODE_PRIVATE);
 
+
         if (sharedPreferences.contains(username)){
             Profile_Fragment profile_activity = new Profile_Fragment();
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -82,11 +88,15 @@ public class Account_Fragment extends Fragment {
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putString(username, email);
                                     editor.putString(passwordAcc,password);
+
+                                    editor.putString("name", account.getName());
+                                    editor.putString("birthday", account.getBirthday());
+                                    editor.putString("address",account.getAddress());
+                                    editor.putString("sex",account.getSex());
+
                                     editor.commit();
 
                                     Profile_Fragment profile_activity = new Profile_Fragment();
-
-
                                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                     transaction.replace(R.id.fragment_container,profile_activity);
                                     transaction.commit();

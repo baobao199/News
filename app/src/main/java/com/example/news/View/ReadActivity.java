@@ -13,6 +13,7 @@ public class ReadActivity extends AppCompatActivity {
 
     TextView tvTitle, tvContent, tvAuthor;
     ImageView ivimage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
