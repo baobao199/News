@@ -10,7 +10,7 @@
 
     <TextView
         android:layout_marginTop="30dp"
-        android:text="REGISTER"
+        android:text="EDIT PROFILE"
         android:textStyle="bold"
         android:gravity="center"
         android:textSize="30dp"
@@ -81,18 +81,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
-            android:id="@+id/btApply"
+            android:id="@+id/btSave"
             android:background="@color/colorPrimaryDark"
             android:textColor="#FAF8F7"
-            android:text="Apply"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <Button
-            android:id="@+id/btClear"
-            android:background="@color/colorPrimaryDark"
-            android:textColor="#FAF8F7"
-            android:layout_marginLeft="20dp"
-            android:text="Clear all"
+            android:text="Save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
