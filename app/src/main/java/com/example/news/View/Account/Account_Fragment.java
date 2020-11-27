@@ -1,6 +1,7 @@
 package com.example.news.View.Account;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -41,7 +42,6 @@ public class Account_Fragment extends Fragment {
 
     public static final String filename = "login";
     public static final String username = "username";
-    public static final String passwordAcc = "password";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -83,18 +83,18 @@ public class Account_Fragment extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             String password = etPassword.getText().toString();
+                          if (snapshot.getValue() == null){
+                              Toast.makeText(getContext(),"Email is not exist",Toast.LENGTH_SHORT).show();
+                          }
                             for (DataSnapshot data : snapshot.getChildren()){
+                                String id = data.getKey();
                                 Account account = data.getValue(Account.class);
                                 if (password.equals(account.getPassword())){
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putString(username, email);
-                                    editor.putString(passwordAcc,password);
-
-                                    editor.putString("name", account.getName());
-                                    editor.putString("birthday", account.getBirthday());
-                                    editor.putString("address",account.getAddress());
-                                    editor.putString("sex",account.getSex());
-
+                                    editor.putString("password", account.getPassword());
+                                    editor.putString("id",id);
+                                    Log.e("bao",id);
                                     editor.commit();
 
                                     Profile_Fragment profile_activity = new Profile_Fragment();
@@ -103,7 +103,7 @@ public class Account_Fragment extends Fragment {
                                     transaction.commit();
                                 }
                                 else {
-                                    Toast.makeText(getContext(),"Emal or Password is not correct",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(),"Password is not correct",Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }

@@ -17,9 +17,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.news.Model.Account;
 import com.example.news.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Profile_Fragment extends Fragment {
+    DatabaseReference databaseReference;
     SharedPreferences sharedPreferences;
     public static final String filename = "login";
     public static final String username = "username";
@@ -31,6 +38,7 @@ public class Profile_Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.activity_profile,container,false);
+
     }
 
     @Override
@@ -46,15 +54,34 @@ public class Profile_Fragment extends Fragment {
         btEditProfile = view.findViewById(R.id.btEditProfile);
         btSingOut = view.findViewById(R.id.btSignOut);
 
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("account");
         sharedPreferences = getContext().getSharedPreferences(filename, Context.MODE_PRIVATE);
-        if (sharedPreferences.contains(username)){
-            tvEmail.setText("Email: "+sharedPreferences.getString(username,"email"));
-            tvAddress.setText("Address: "+sharedPreferences.getString("address","address"));
-            tvSex.setText("Gender: "+sharedPreferences.getString("sex","sex"));
-            tvBirthday.setText("Birthday: "+sharedPreferences.getString("birthday","birthday"));
-            tvName.setText("Full name: "+sharedPreferences.getString("name","name"));
-        }
 
+        if (sharedPreferences.contains(username)){
+            String id = sharedPreferences.getString("id","id");
+
+            databaseReference.orderByKey().equalTo(id).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot data : snapshot.getChildren()) {
+                        Account account = data.getValue(Account.class);
+
+                        tvName.setText("Full name: "+account.getName());
+                        tvAddress.setText("Address: "+account.getAddress());
+                        tvSex.setText("Gender: "+account.getSex());
+                        tvBirthday.setText("Birthday: "+account.getBirthday());
+                        tvEmail.setText("Email: "+account.getEmail());
+                        account.getPassword();
+                        Log.e("test",account.getPassword());
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
         btSingOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

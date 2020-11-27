@@ -62,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
                 String fullName = etFullname.getText().toString();
-                String brithday = etBirthday.getText().toString();
+                String birthday = etBirthday.getText().toString();
                 String address = etAddress.getText().toString();
 
                 int selectedRadioButtonId = radioButton.getCheckedRadioButtonId();
@@ -70,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (selectedRadioButtonId != -1){
                     selectedRadioButton = findViewById(selectedRadioButtonId);
                     sex = selectedRadioButton.getText().toString();
-                    if(email.isEmpty() || password.isEmpty() || fullName.isEmpty() || brithday.isEmpty() || address.isEmpty()){
+                    if(email.isEmpty() || password.isEmpty() || fullName.isEmpty() || birthday.isEmpty() || address.isEmpty()){
                         Toast.makeText(RegisterActivity.this,"You must to enter your information",Toast.LENGTH_SHORT).show();
                     }
                     else {
@@ -78,7 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
                         account.setPassword(password);
                         account.setAddress(address);
                         account.setEmail(email);
-                        account.setBirthday(brithday);
+                        account.setBirthday(birthday);
                         account.setSex(sex);
 
                         databaseReference.push().setValue(account);

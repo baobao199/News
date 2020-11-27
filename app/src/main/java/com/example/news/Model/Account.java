@@ -1,6 +1,7 @@
 package com.example.news.Model;
 
 public class Account {
+    private String id;
     private String name;
     private String email;
     private String address;
@@ -8,7 +9,8 @@ public class Account {
     private String sex;
     private String password;
 
-    public Account(String name, String email, String address, String birthday, String sex, String password) {
+    public Account(String id, String name, String email, String address, String birthday, String sex, String password) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.address = address;
@@ -18,6 +20,15 @@ public class Account {
     }
 
     public Account() {
+    }
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
