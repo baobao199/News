@@ -27,6 +27,7 @@
     <EditText
         android:id="@+id/etPassword"
         android:layout_marginTop="15dp"
+        android:inputType="textPassword"
         android:hint="Password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -56,7 +57,7 @@
             android:id="@+id/radioButton_female"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Famale" />
+            android:text="Female" />
     </RadioGroup>
 
 
